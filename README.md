@@ -1,4 +1,4 @@
-# Cyango Story Viewer
+# Cyango Story Iframe Example
 
 This project provides a simple web interface to view and interact with Cyango stories through an iframe. It includes a sidebar with scene navigation buttons and uses postMessage for communication between the parent page and the iframe.
 
