@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("toggleSidebar");
   const iframeContainer = document.querySelector(".iframe-container");
 
-  let currentScene = "";
+  function sendMessageToIframe(data) {
+    console.log("Sending message to iframe:", data);
+    iframe.contentWindow.postMessage(JSON.stringify(data), "*");
+  }
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -23,20 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function updateIframeScene(scene) {
-    if (scene === currentScene) return; // Don't update if it's the same scene
-
-    currentScene = scene;
-    const baseUrl = "https://192.168.1.67:3001/story/66b9e27cef1caa2311610e92";
-    const newUrl = `${baseUrl}?scene=${scene}`;
-
-    // Update the iframe src, but prevent a full reload
-    iframe.contentWindow.location.replace(newUrl);
+    sendMessageToIframe({ action: "GO_TO_SCENE", sceneId: scene });
   }
 
   // Listen for the iframe load event
   iframe.addEventListener("load", () => {
-    // Extract the current scene from the iframe URL
-    const iframeUrl = new URL(iframe.src);
-    currentScene = iframeUrl.searchParams.get("scene") || "";
+    // You might want to send an initial message or perform any setup here
+    console.log("Iframe loaded");
   });
 });
