@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded iframe Example</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="sidebar" class="sidebar">
+      <div class="logo-container">
+        <img src="logo.png" alt="Logo" class="logo" />
+      </div>
+      <button id="toggleSidebar" class="toggle-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="button-container">
+        <button
+          class="scene-button"
+          data-scene="scene_bc091cb7-fe62-4381-b74e-1ebe871160a0"
+        >
+          Scene 1
+        </button>
+        <button
+          class="scene-button"
+          data-scene="scene_8520ad62-0635-48ae-9b98-bbd75e2d41d1"
+        >
+          Scene 2
+        </button>
+        <button
+          class="scene-button"
+          data-scene="scene_d85338be-d683-448a-8699-bec8e2d46aff"
+        >
+          Scene 3
+        </button>
+        <button
+          class="scene-button"
+          data-scene="scene_95c61e1d-57b6-4c56-881f-a973c718f0c8"
+        >
+          Scene 4
+        </button>
+      </div>
+    </div>
+    <div class="iframe-container">
+      <iframe
+        id="storyIframe"
+        src="https://192.168.1.67:3001/story/66b9e27cef1caa2311610e92"
+        frameborder="0"
+      ></iframe>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
