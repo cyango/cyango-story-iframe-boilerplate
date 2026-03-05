@@ -11,9 +11,9 @@ body {
 }
 
 .sidebar {
-  width: 200px;
+  width: 220px;
   height: 100%;
-  background-color: rgba(240, 240, 240, 0.5);
+  background: linear-gradient(180deg, #0f0f12 0%, #18181b 100%);
   position: fixed;
   left: 0;
   top: 0;
@@ -24,7 +24,7 @@ body {
 }
 
 .sidebar.closed {
-  transform: translateX(-200px);
+  transform: translateX(-220px);
 }
 
 .logo-container {
@@ -41,26 +41,101 @@ body {
   position: absolute;
   top: 10px;
   right: -40px;
-  background: rgba(240, 240, 240, 0.5);
+  background: #27272a;
+  color: #a1a1aa;
   border: none;
   font-size: 24px;
   cursor: pointer;
   padding: 5px 10px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.toggle-btn:hover {
+  background: #3f3f46;
+  color: #fff;
 }
 
 .button-container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  gap: 12px;
+  padding: 16px;
   flex-grow: 1;
+  overflow-y: auto;
 }
 
-.scene-button {
-  margin-bottom: 10px;
-  padding: 10px;
+.scene-card {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
   cursor: pointer;
-  background-color: white;
-  border: 1px solid #ccc;
+  background: #1a1a1e;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-align: left;
+}
+
+.scene-card:hover {
+  z-index: 2;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.scene-card--active {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px #6366f1;
+}
+
+.scene-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.scene-card__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.scene-card__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 24px 12px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.scene-card__placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #2d2d35 0%, #1f1f24 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scene-card__placeholder::after {
+  content: "";
+  width: 32px;
+  height: 32px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236366f1' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z'/%3E%3C/svg%3E") center/contain no-repeat;
+  opacity: 0.5;
 }
 
 .iframe-container {
@@ -68,7 +143,7 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 200px;
+  left: 220px;
   transition: 0.3s;
 }
 

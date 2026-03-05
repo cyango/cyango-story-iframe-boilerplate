@@ -11,18 +11,15 @@ This project provides a simple web interface to view and interact with Cyango st
    ```html
    <iframe
      id="storyIframe"
-     src="https://www.cyango.com/story/YOUR_STORY_ID"
+     src="https://story.cyango.com/YOUR_STORY_ID"
      frameborder="0"
    ></iframe>
    ```
 
    Replace `YOUR_STORY_ID` with the actual ID of your Cyango story.
 
-4. Update the scene buttons in the `index.html` file to match your story's scenes:
-
-   ```html
-   <button class="scene-button" data-scene="YOUR_SCENE_ID">Scene Name</button>
-   ```
+4. Scene buttons are created dynamically from your story's `storyJson.scenes` using the story ID in the iframe URL.
+   You only need to set a valid story URL in `index.html`.
 
 5. Replace the `logo.png` file with your own logo image.
 6. Save the changes to `index.html`.
@@ -30,7 +27,7 @@ This project provides a simple web interface to view and interact with Cyango st
 
 ## Features
 
-- Sidebar with scene navigation buttons
+- Sidebar with dynamic scene navigation buttons
 - Collapsible sidebar for full-screen viewing
 - Communication with the Cyango story iframe using postMessage
 
@@ -42,18 +39,22 @@ This project uses the postMessage API to communicate with the Cyango story ifram
 
 ### How it works
 
-When a scene button is clicked, the parent page sends a message to the iframe with the following structure:
+When a scene button is clicked, the parent page sends a Cyango `IAction` message to the iframe with the following structure:
 
 {
-action: "GO_TO_SCENE",
-sceneId: "scene_id_here"
+  type: "GO_TO_SCENE",
+  targetSceneId: "scene_id_here"
 }
 
 The Cyango story iframe should be set up to listen for these messages and handle the scene changes accordingly.
 
+The example first loads scenes by calling:
+
+`POST https://api.cyango.com/story/getStoryJsonById`
+
 ## Customization
 
-You can customize the appearance of the sidebar and buttons by modifying the `styles.css` file. To add or remove scene buttons, edit the `<div class="button-container">` section in the `index.html` file.
+You can customize the appearance of the sidebar and buttons by modifying the `styles.css` file.
 
 ### Changing Colors
 
@@ -63,9 +64,9 @@ To change the color scheme, modify the following CSS properties in `styles.css`:
 - Button colors: `.scene-button` background-color and color
 - Toggle button: `.toggle-btn` background
 
-### Adding More Buttons
+### Static fallback buttons (optional)
 
-To add more scene buttons, simply add more button elements to the `button-container` div in `index.html`:
+If you want a fallback for offline/CORS failures, you can keep manual `.scene-button` elements inside the `button-container` in `index.html`.
 
 ## Troubleshooting
 
